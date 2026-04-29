@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Asistencia</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="img/Logo.png" alt="Logo CareMatch">
+      <span><b>Care</b>Match</span>
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page">
+      <a href="servicios.html" class="back-arrow">←</a>
+      <h1 class="title-line">Asistencia Médica</h1>
+      <p class="subtitle">Profesionales de la salud especializados en cuidado de adultos mayores</p>
+
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, comuna o especialidad...">
+        <select id="filterSelect">
+          <option value="todos">Todas las especialidades</option>
+          <option value="enfermería">Enfermería</option>
+          <option value="kinesiología">Kinesiología</option>
+          <option value="tens">TENS</option>
+        </select>
+      </div>
+
+      <div class="people-grid" id="cardsContainer">
+        <p>Cargando profesionales...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CareMatch. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => renderCards('asistencia'));
+  </script>
+</body>
+</html>
