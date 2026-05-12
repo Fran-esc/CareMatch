@@ -3,28 +3,28 @@ const API_BASE_URL = 'http://localhost:8000/api';
 // Datos locales de fallback
 const localData = {
   cuidado: [
-    { nombre: 'María González', comuna: 'Las Condes', filtro: 'mañana', exp: '5 años de experiencia', img: 'https://randomuser.me/api/portraits/women/65.jpg' },
-    { nombre: 'Carlos Rivas', comuna: 'Providencia', filtro: 'tarde', exp: 'Cuidador certificado', img: 'https://randomuser.me/api/portraits/men/43.jpg' },
-    { nombre: 'Ana Pérez', comuna: 'Ñuñoa', filtro: 'noche', exp: 'Apoyo en alimentación y movilidad', img: 'https://randomuser.me/api/portraits/women/44.jpg' },
-    { nombre: 'Luis Herrera', comuna: 'Santiago', filtro: 'mañana', exp: 'Turnos diarios y fines de semana', img: 'https://randomuser.me/api/portraits/men/76.jpg' },
-    { nombre: 'Camila Soto', comuna: 'La Florida', filtro: 'tarde', exp: 'Cuidados básicos y compañía', img: 'https://randomuser.me/api/portraits/women/12.jpg' },
-    { nombre: 'Patricia Muñoz', comuna: 'Maipú', filtro: 'noche', exp: 'Cuidado nocturno', img: 'https://randomuser.me/api/portraits/women/28.jpg' }
+    { id: 1, nombre: 'María González', comuna: 'Las Condes', filtro: 'mañana', exp: '5 años de experiencia', img: 'https://randomuser.me/api/portraits/women/65.jpg' },
+    { id: 2, nombre: 'Carlos Rivas', comuna: 'Providencia', filtro: 'tarde', exp: 'Cuidador certificado', img: 'https://randomuser.me/api/portraits/men/43.jpg' },
+    { id: 3, nombre: 'Ana Pérez', comuna: 'Ñuñoa', filtro: 'noche', exp: 'Apoyo en alimentación y movilidad', img: 'https://randomuser.me/api/portraits/women/44.jpg' },
+    { id: 4, nombre: 'Luis Herrera', comuna: 'Santiago', filtro: 'mañana', exp: 'Turnos diarios y fines de semana', img: 'https://randomuser.me/api/portraits/men/76.jpg' },
+    { id: 5, nombre: 'Camila Soto', comuna: 'La Florida', filtro: 'tarde', exp: 'Cuidados básicos y compañía', img: 'https://randomuser.me/api/portraits/women/12.jpg' },
+    { id: 6, nombre: 'Patricia Muñoz', comuna: 'Maipú', filtro: 'noche', exp: 'Cuidado nocturno', img: 'https://randomuser.me/api/portraits/women/28.jpg' }
   ],
   asistencia: [
-    { nombre: 'Dra. Fernanda Lagos', comuna: 'Las Condes', filtro: 'enfermería', exp: 'Enfermería domiciliaria', img: 'https://randomuser.me/api/portraits/women/23.jpg' },
-    { nombre: 'Tomás Araya', comuna: 'Providencia', filtro: 'kinesiología', exp: 'Kinesiología adulto mayor', img: 'https://randomuser.me/api/portraits/men/32.jpg' },
-    { nombre: 'Valentina Vera', comuna: 'Ñuñoa', filtro: 'tens', exp: 'TENS con experiencia clínica', img: 'https://randomuser.me/api/portraits/women/52.jpg' },
-    { nombre: 'Jorge Pino', comuna: 'Santiago', filtro: 'enfermería', exp: 'Control de signos vitales', img: 'https://randomuser.me/api/portraits/men/52.jpg' },
-    { nombre: 'Daniela Torres', comuna: 'Macul', filtro: 'kinesiología', exp: 'Rehabilitación motora', img: 'https://randomuser.me/api/portraits/women/51.jpg' },
-    { nombre: 'Ricardo Fuentes', comuna: 'La Reina', filtro: 'tens', exp: 'Apoyo postoperatorio', img: 'https://randomuser.me/api/portraits/men/83.jpg' }
+    { id: 7, nombre: 'Dra. Fernanda Lagos', comuna: 'Las Condes', filtro: 'enfermería', exp: 'Enfermería domiciliaria', img: 'https://randomuser.me/api/portraits/women/23.jpg' },
+    { id: 8, nombre: 'Tomás Araya', comuna: 'Providencia', filtro: 'kinesiología', exp: 'Kinesiología adulto mayor', img: 'https://randomuser.me/api/portraits/men/32.jpg' },
+    { id: 9, nombre: 'Valentina Vera', comuna: 'Ñuñoa', filtro: 'tens', exp: 'TENS con experiencia clínica', img: 'https://randomuser.me/api/portraits/women/52.jpg' },
+    { id: 10, nombre: 'Jorge Pino', comuna: 'Santiago', filtro: 'enfermería', exp: 'Control de signos vitales', img: 'https://randomuser.me/api/portraits/men/52.jpg' },
+    { id: 11, nombre: 'Daniela Torres', comuna: 'Macul', filtro: 'kinesiología', exp: 'Rehabilitación motora', img: 'https://randomuser.me/api/portraits/women/51.jpg' },
+    { id: 12, nombre: 'Ricardo Fuentes', comuna: 'La Reina', filtro: 'tens', exp: 'Apoyo postoperatorio', img: 'https://randomuser.me/api/portraits/men/83.jpg' }
   ],
   acompanamiento: [
-    { nombre: 'Sofía Morales', comuna: 'Las Condes', filtro: 'trámites', exp: 'Acompañamiento a bancos y compras', img: 'https://randomuser.me/api/portraits/women/35.jpg' },
-    { nombre: 'Pedro Castillo', comuna: 'Providencia', filtro: 'paseos', exp: 'Paseos y actividades recreativas', img: 'https://randomuser.me/api/portraits/men/63.jpg' },
-    { nombre: 'Elena Figueroa', comuna: 'Ñuñoa', filtro: 'controles', exp: 'Acompañamiento a controles médicos', img: 'https://randomuser.me/api/portraits/women/73.jpg' },
-    { nombre: 'Marco Díaz', comuna: 'Santiago', filtro: 'trámites', exp: 'Gestiones y apoyo diario', img: 'https://randomuser.me/api/portraits/men/84.jpg' },
-    { nombre: 'Rocío Medina', comuna: 'Maipú', filtro: 'paseos', exp: 'Compañía y conversación', img: 'https://randomuser.me/api/portraits/women/57.jpg' },
-    { nombre: 'Héctor Salas', comuna: 'La Florida', filtro: 'controles', exp: 'Traslado y espera en consultas', img: 'https://randomuser.me/api/portraits/men/24.jpg' }
+    { id: 13, nombre: 'Sofía Morales', comuna: 'Las Condes', filtro: 'trámites', exp: 'Acompañamiento a bancos y compras', img: 'https://randomuser.me/api/portraits/women/35.jpg' },
+    { id: 14, nombre: 'Pedro Castillo', comuna: 'Providencia', filtro: 'paseos', exp: 'Paseos y actividades recreativas', img: 'https://randomuser.me/api/portraits/men/63.jpg' },
+    { id: 15, nombre: 'Elena Figueroa', comuna: 'Ñuñoa', filtro: 'controles', exp: 'Acompañamiento a controles médicos', img: 'https://randomuser.me/api/portraits/women/73.jpg' },
+    { id: 16, nombre: 'Marco Díaz', comuna: 'Santiago', filtro: 'trámites', exp: 'Gestiones y apoyo diario', img: 'https://randomuser.me/api/portraits/men/84.jpg' },
+    { id: 17, nombre: 'Rocío Medina', comuna: 'Maipú', filtro: 'paseos', exp: 'Compañía y conversación', img: 'https://randomuser.me/api/portraits/women/57.jpg' },
+    { id: 18, nombre: 'Héctor Salas', comuna: 'La Florida', filtro: 'controles', exp: 'Traslado y espera en consultas', img: 'https://randomuser.me/api/portraits/men/24.jpg' }
   ]
 };
 
@@ -78,7 +78,7 @@ function renderCards(tipo) {
           <p>${item.comuna}</p>
           <p>${item.exp}</p>
           <span class="badge">${item.filtro}</span>
-          <button class="btn-primary" onclick="solicitarServicio('${item.nombre}')">Solicitar servicio</button>
+          <button class="btn-primary" onclick="reservarServicio(${item.id}, '${item.nombre}', '${tipo}')">Contratar servicio</button>
         </article>
       `).join('')
       : '<p>No se encontraron resultados con esos filtros.</p>';
@@ -89,8 +89,227 @@ function renderCards(tipo) {
   paint();
 }
 
-function solicitarServicio(nombre) {
-  alert(`Solicitud enviada para ${nombre}. Un ejecutivo de CareMatch tomará contacto.`);
+function reservarServicio(id, nombre, tipo) {
+  const userId = localStorage.getItem('userId');
+  
+  if (!userId) {
+    alert('Debes iniciar sesión antes de contratar un servicio. Redirigiendo a login...');
+    window.location.href = 'login.html';
+    return;
+  }
+  
+  const booking = {
+    proveedorId: id,
+    proveedorNombre: nombre,
+    tipo,
+    monto: getServiceAmount(tipo),
+    fecha_solicitud: new Date().toLocaleString()
+  };
+  localStorage.setItem('bookingCareMatch', JSON.stringify(booking));
+  window.location.href = 'booking.html';
+}
+
+function getServiceAmount(tipo) {
+  const amounts = {
+    cuidado: 45000,
+    asistencia: 55000,
+    acompanamiento: 35000
+  };
+  return amounts[tipo] || 40000;
+}
+
+function formatCurrency(amount) {
+  return amount.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
+}
+
+let selectedSchedule = null;
+
+function initBookingPage() {
+  const userId = localStorage.getItem('userId');
+  
+  if (!userId) {
+    const bookingSummary = document.getElementById('bookingSummary');
+    if (bookingSummary) {
+      bookingSummary.innerHTML = '<p style="color: red;">Debes iniciar sesión para acceder a esta página. <a href="login.html">Ir a login</a></p>';
+    }
+    document.getElementById('continuePaymentBtn').disabled = true;
+    return;
+  }
+  
+  const booking = JSON.parse(localStorage.getItem('bookingCareMatch')) || null;
+  const bookingSummary = document.getElementById('bookingSummary');
+  const scheduleContainer = document.getElementById('scheduleContainer');
+  const continueBtn = document.getElementById('continuePaymentBtn');
+  const bookingMsg = document.getElementById('bookingMsg');
+
+  if (!booking || !booking.proveedorNombre) {
+    bookingSummary.innerHTML = '<p>No se encontró una reserva activa. Regresa a servicios para seleccionar un proveedor.</p>';
+    continueBtn.disabled = true;
+    return;
+  }
+
+  bookingSummary.innerHTML = `
+    <div class="booking-info">
+      <h2>${booking.proveedorNombre}</h2>
+      <p>Servicio: <strong>${booking.tipo}</strong></p>
+      <p>Precio estimado: <strong>${formatCurrency(booking.monto)}</strong></p>
+      <p class="booking-help">Selecciona un horario disponible en el calendario.</p>
+    </div>
+  `;
+
+  scheduleContainer.innerHTML = '';
+  const slots = generateAvailableCalendar(booking.tipo);
+  slots.forEach(day => {
+    const dayCard = document.createElement('article');
+    dayCard.className = 'day-card';
+    dayCard.innerHTML = `
+      <h3>${day.label}</h3>
+      <div class="slots-row"></div>
+    `;
+    const row = dayCard.querySelector('.slots-row');
+    day.times.forEach(slot => {
+      const slotButton = document.createElement('button');
+      slotButton.type = 'button';
+      slotButton.className = 'time-slot';
+      slotButton.textContent = slot.label;
+      slotButton.addEventListener('click', () => selectScheduleSlot(slot, slotButton, bookingMsg, continueBtn));
+      row.appendChild(slotButton);
+    });
+    scheduleContainer.appendChild(dayCard);
+  });
+
+  continueBtn.addEventListener('click', continueToPayment);
+}
+
+function generateAvailableCalendar(tipo) {
+  const timeOptions = {
+    cuidado: ['08:00', '10:00', '14:00', '16:00'],
+    asistencia: ['09:00', '11:00', '15:00', '17:00'],
+    acompanamiento: ['10:00', '12:00', '16:00', '18:00']
+  };
+  const baseDate = new Date();
+  baseDate.setHours(0, 0, 0, 0);
+  const days = [];
+
+  for (let i = 1; i <= 5; i++) {
+    const current = new Date(baseDate);
+    current.setDate(current.getDate() + i);
+    const label = current.toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'short' });
+    const times = timeOptions[tipo] || ['09:00', '12:00', '15:00'];
+    days.push({
+      label: label.charAt(0).toUpperCase() + label.slice(1),
+      times: times.map(time => ({
+        label: time,
+        value: `${current.getFullYear()}-${String(current.getMonth()+1).padStart(2,'0')}-${String(current.getDate()).padStart(2,'0')}T${time}:00`
+      }))
+    });
+  }
+
+  return days;
+}
+
+function selectScheduleSlot(slot, button, bookingMsg, continueBtn) {
+  selectedSchedule = slot;
+  document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+  button.classList.add('selected');
+  bookingMsg.textContent = `Horario seleccionado: ${slot.label} el ${slot.value.slice(0, 10)}`;
+  continueBtn.disabled = false;
+}
+
+function continueToPayment() {
+  if (!selectedSchedule) {
+    return;
+  }
+
+  const booking = JSON.parse(localStorage.getItem('bookingCareMatch')) || {};
+  booking.fecha_requerida = selectedSchedule.value;
+  booking.horario = selectedSchedule.label;
+  booking.orderId = `CM-${Math.floor(Math.random() * 900000) + 100000}`;
+  localStorage.setItem('bookingCareMatch', JSON.stringify(booking));
+  window.location.href = 'webpay.html';
+}
+
+function initWebpayPage() {
+  const userId = localStorage.getItem('userId');
+  
+  if (!userId) {
+    const paymentSummary = document.getElementById('paymentSummary');
+    if (paymentSummary) {
+      paymentSummary.innerHTML = '<p style="color: red;">Debes iniciar sesión para acceder a esta página. <a href="login.html">Ir a login</a></p>';
+    }
+    document.getElementById('webpayForm').querySelector('button[type=submit]').disabled = true;
+    return;
+  }
+  
+  const booking = JSON.parse(localStorage.getItem('bookingCareMatch')) || null;
+  const paymentSummary = document.getElementById('paymentSummary');
+  const paymentMessage = document.getElementById('paymentMessage');
+  const returnBtn = document.getElementById('returnServicesBtn');
+  const webpayForm = document.getElementById('webpayForm');
+
+  if (!booking || !booking.proveedorNombre || !booking.fecha_requerida) {
+    paymentSummary.innerHTML = '<p>No hay una reserva registrada. Regresa a servicios para seleccionar un horario.</p>';
+    webpayForm.querySelector('button[type=submit]').disabled = true;
+    return;
+  }
+
+  paymentSummary.innerHTML = `
+    <div class="payment-summary-item"><strong>Proveedor:</strong> ${booking.proveedorNombre}</div>
+    <div class="payment-summary-item"><strong>Servicio:</strong> ${booking.tipo}</div>
+    <div class="payment-summary-item"><strong>Horario:</strong> ${booking.horario} - ${booking.fecha_requerida.slice(0, 10)}</div>
+    <div class="payment-summary-item"><strong>Monto:</strong> ${formatCurrency(booking.monto)}</div>
+    <div class="payment-summary-item"><strong>Orden:</strong> ${booking.orderId}</div>
+  `;
+
+  webpayForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (paymentFormIsValid()) {
+      const success = await createSolicitudOnBackend(booking, userId);
+      if (success) {
+        paymentMessage.textContent = 'Pago simulado aprobado por WebPay. ¡Reserva confirmada en el backend!';
+        paymentMessage.classList.add('success');
+        webpayForm.querySelector('button[type=submit]').disabled = true;
+        returnBtn.classList.remove('hidden');
+      } else {
+        paymentMessage.textContent = 'El pago se aprobó localmente, pero no se pudo guardar la reserva en el backend.';
+        paymentMessage.classList.remove('success');
+      }
+    } else {
+      paymentMessage.textContent = 'Completa correctamente los datos de pago.';
+      paymentMessage.classList.remove('success');
+    }
+  });
+
+  returnBtn.addEventListener('click', () => window.location.href = 'servicios.html');
+}
+
+async function createSolicitudOnBackend(booking, userId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/solicitudes/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        usuario_id: Number(userId),
+        proveedor_id: Number(booking.proveedorId),
+        descripcion: `Reserva de servicio ${booking.tipo} con ${booking.proveedorNombre}`,
+        fecha_requerida: booking.fecha_requerida
+      })
+    });
+
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+}
+
+function paymentFormIsValid() {
+  const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+  const expiryDate = document.getElementById('expiryDate').value;
+  const cvv = document.getElementById('cvv').value;
+  const expiryValid = /^\d{2}\/\d{2}$/.test(expiryDate);
+  return cardNumber.length >= 12 && expiryValid && cvv.length >= 3;
 }
 
 // Manejo de formulario de contacto
@@ -151,9 +370,12 @@ if (showLogin) {
 if (registerForm) {
   registerForm.addEventListener('submit', async function (e) {
     e.preventDefault();
+    const nombre = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
     const user = {
-      nombre: document.getElementById('regName').value,
-      email: document.getElementById('regEmail').value,
+      username: email,
+      nombre,
+      email,
       password: document.getElementById('regPassword').value,
       rol: document.getElementById('regRole').value
     };
@@ -168,6 +390,9 @@ if (registerForm) {
       if (response.ok) {
         document.getElementById('authMsg').textContent = 'Usuario registrado correctamente. Ahora puedes iniciar sesión.';
         registerForm.reset();
+      } else {
+        const errorData = await response.json();
+        document.getElementById('authMsg').textContent = errorData.detail || 'Error al registrar usuario.';
       }
     } catch (error) {
       localStorage.setItem('usuarioCareMatch', JSON.stringify(user));
@@ -193,6 +418,7 @@ if (loginForm) {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.user.id);
         document.getElementById('authMsg').textContent = `Bienvenido/a ${data.user.first_name} ${data.user.last_name}. Sesión iniciada.`;
         loginForm.reset();
       } else {
@@ -203,6 +429,7 @@ if (loginForm) {
       const user = JSON.parse(localStorage.getItem('usuarioCareMatch'));
       if (user && user.email === email && user.password === password) {
         localStorage.setItem('sesionCareMatch', 'activa');
+        localStorage.setItem('userEmail', email);
         document.getElementById('authMsg').textContent = `Bienvenido/a ${user.nombre}. Sesión iniciada.`;
         loginForm.reset();
       } else {
@@ -210,4 +437,91 @@ if (loginForm) {
       }
     }
   });
+}
+
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('sesionCareMatch');
+    document.getElementById('authMsg').textContent = 'Sesión cerrada correctamente.';
+  });
+}
+
+const profileForm = document.getElementById('profileForm');
+if (profileForm) {
+  const profileMsg = document.getElementById('profileMsg');
+  const profileLink = document.getElementById('profileCertificadoLink');
+
+  async function loadPerfil() {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      profileMsg.textContent = 'Debes iniciar sesión antes de acceder a tu perfil.';
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/usuarios/perfil/?username=${encodeURIComponent(userEmail)}`);
+      if (!response.ok) {
+        profileMsg.textContent = 'No se pudo cargar el perfil. Intenta iniciar sesión de nuevo.';
+        return;
+      }
+      const data = await response.json();
+      document.getElementById('profileName').value = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+      document.getElementById('profileEmail').value = data.email || '';
+      document.getElementById('profileTelefono').value = data.telefono || '';
+      document.getElementById('profileRole').value = data.rol || 'solicitante';
+      document.getElementById('profileProfesion').value = data.profesion || '';
+      document.getElementById('profileExperiencia').value = data.experiencia || '';
+      if (data.certificado) {
+        profileLink.href = data.certificado;
+        profileLink.textContent = 'Ver certificado actual';
+        profileLink.classList.remove('hidden');
+      } else {
+        profileLink.classList.add('hidden');
+      }
+    } catch (error) {
+      profileMsg.textContent = 'Error al cargar datos del perfil.';
+    }
+  }
+
+  profileForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      profileMsg.textContent = 'Debes iniciar sesión antes de actualizar el perfil.';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('username', userEmail);
+    formData.append('nombre', document.getElementById('profileName').value);
+    formData.append('telefono', document.getElementById('profileTelefono').value);
+    formData.append('rol', document.getElementById('profileRole').value);
+    formData.append('profesion', document.getElementById('profileProfesion').value);
+    formData.append('experiencia', document.getElementById('profileExperiencia').value);
+    const certificadoFile = document.getElementById('profileCertificado').files[0];
+    if (certificadoFile) {
+      formData.append('certificado', certificadoFile);
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/usuarios/perfil/`, {
+        method: 'PUT',
+        body: formData,
+      });
+      if (response.ok) {
+        profileMsg.textContent = 'Perfil actualizado correctamente.';
+        loadPerfil();
+      } else {
+        const errorData = await response.json();
+        profileMsg.textContent = errorData.detail || 'Error al actualizar el perfil.';
+      }
+    } catch (error) {
+      profileMsg.textContent = 'Error de conexión al actualizar el perfil.';
+    }
+  });
+
+  loadPerfil();
 }

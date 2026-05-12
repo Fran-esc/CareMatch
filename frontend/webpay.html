@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Pago WebPay</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="img/Logo.png" alt="Logo CareMatch">
+      <span><b>Care</b>Match</span>
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page">
+      <a href="booking.html" class="back-arrow">←</a>
+      <h1 class="title-line">Pago WebPay</h1>
+      <p class="subtitle">Completa el pago simulado para confirmar tu servicio.</p>
+
+      <div class="payment-panel">
+        <div id="paymentSummary" class="payment-summary"></div>
+        <form id="webpayForm" class="payment-form">
+          <label class="payment-field">
+            <span>Número de tarjeta</span>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required />
+          </label>
+          <div class="payment-fields-row">
+            <label class="payment-field">
+              <span>Fecha de expiración</span>
+              <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required />
+            </label>
+            <label class="payment-field">
+              <span>CVV</span>
+              <input type="text" id="cvv" placeholder="123" maxlength="4" required />
+            </label>
+          </div>
+          <button type="submit" class="btn-primary">Pagar con WebPay</button>
+          <p id="paymentMessage" class="message"></p>
+          <button type="button" id="returnServicesBtn" class="btn-secondary hidden">Volver a servicios</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CareMatch. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initWebpayPage);
+  </script>
+</body>
+</html>
