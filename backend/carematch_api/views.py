@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Proveedor, Contacto, Solicitud
-from .serializers import UserSerializer, ProveedorSerializer, ContactoSerializer, SolicitudSerializer
+from .models import Proveedor, Contacto, Solicitud, DocumentoVerificacion, Evaluacion
+from .serializers import UserSerializer, ProveedorSerializer, ContactoSerializer, SolicitudSerializer, DocumentoVerificacionSerializer, EvaluacionSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -83,4 +83,32 @@ class SolicitudViewSet(viewsets.ModelViewSet):
         usuario_id = self.request.query_params.get('usuario_id', None)
         if usuario_id is not None:
             queryset = queryset.filter(usuario_id=usuario_id)
+        return queryset
+
+
+class DocumentoVerificacionViewSet(viewsets.ModelViewSet):
+    queryset = DocumentoVerificacion.objects.all()
+    serializer_class = DocumentoVerificacionSerializer
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
+    def get_queryset(self):
+        queryset = DocumentoVerificacion.objects.all()
+        perfil_id = self.request.query_params.get('perfil_id', None)
+        if perfil_id is not None:
+            queryset = queryset.filter(perfil_id=perfil_id)
+        return queryset
+
+
+class EvaluacionViewSet(viewsets.ModelViewSet):
+    queryset = Evaluacion.objects.all()
+    serializer_class = EvaluacionSerializer
+
+    def get_queryset(self):
+        queryset = Evaluacion.objects.all()
+        usuario_id = self.request.query_params.get('usuario_id', None)
+        proveedor_id = self.request.query_params.get('proveedor_id', None)
+        if usuario_id is not None:
+            queryset = queryset.filter(usuario_id=usuario_id)
+        if proveedor_id is not None:
+            queryset = queryset.filter(proveedor_id=proveedor_id)
         return queryset

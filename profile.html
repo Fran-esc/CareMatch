@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Mi perfil</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html"><img class="logo-img" src="img/Logo.png" alt="Logo CareMatch"><span><b>Care</b>Match</span></a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="profile-page">
+    <section class="profile-box">
+      <h1>Mi perfil</h1>
+      <p>Actualiza tu nombre, profesión, experiencia y documentos de validación.</p>
+
+      <form id="profileForm">
+        <input type="text" id="profileName" placeholder="Nombre completo" required />
+        <input type="email" id="profileEmail" placeholder="Correo electrónico" readonly />
+        <input type="text" id="profileTelefono" placeholder="Teléfono" />
+        <select id="profileRole" required>
+          <option value="solicitante">Familia</option>
+          <option value="cuidador">Cuidador</option>
+          <option value="profesional">Profesional de salud</option>
+          <option value="acompañante">Acompañante</option>
+        </select>
+        <input type="text" id="profileProfesion" placeholder="Profesión (solo para profesionales de salud)" />
+        <textarea id="profileExperiencia" placeholder="Experiencia y certificaciones" rows="5"></textarea>
+        <label class="file-upload-label">
+          Subir certificado o documentación de validación
+          <input type="file" id="profileCertificado" accept="application/pdf,image/*" />
+        </label>
+        <a id="profileCertificadoLink" class="hidden" target="_blank" rel="noopener noreferrer"></a>
+        <button class="btn-primary" type="submit">Guardar cambios</button>
+      </form>
+
+      <p id="profileMsg" class="success-msg"></p>
+    </section>
+  </main>
+
+  <footer>CareMatch © 2026</footer>
+  <script src="app.js"></script>
+</body>
+</html>

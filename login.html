@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Iniciar sesión</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html"><img class="logo-img" src="img/Logo.png" alt="Logo CareMatch"><span><b>Care</b>Match</span></a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-box">
+      <h1>Inicio de sesión</h1>
+      <p>Ingresa a tu cuenta para gestionar solicitudes y servicios.</p>
+
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Correo electrónico" required />
+        <input type="password" id="loginPassword" placeholder="Contraseña" required minlength="6" />
+        <button class="btn-primary" type="submit">Ingresar</button>
+      </form>
+
+      <div class="auth-options">
+        <button id="showRegister" type="button">Crear cuenta</button>
+        <button id="logoutBtn" type="button">Cerrar sesión</button>
+      </div>
+
+      <form id="registerForm" class="hidden">
+        <h2>Registro de usuario</h2>
+        <input type="text" id="regName" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Correo electrónico" required />
+        <input type="password" id="regPassword" placeholder="Contraseña mínimo 6 caracteres" required minlength="6" />
+        <select id="regRole" required>
+          <option value="solicitante">Familia</option>
+          <option value="cuidador">Cuidador</option>
+          <option value="profesional">Profesional de salud</option>
+        </select>
+        <button class="btn-secondary" type="submit">Registrar</button>
+      </form>
+      <p id="authMsg" class="success-msg"></p>
+    </section>
+  </main>
+
+  <footer>CareMatch © 2026</footer>
+  <script src="app.js"></script>
+</body>
+</html>

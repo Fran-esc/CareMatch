@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Evaluar servicio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="img/Logo.png" alt="Logo CareMatch">
+      <span><b>Care</b>Match</span>
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page">
+      <a href="servicios.html" class="back-arrow">←</a>
+      <h1 class="title-line">Evalúa tu experiencia</h1>
+      <p class="subtitle">Tu opinión nos ayuda a mejorar la calidad de nuestros servicios.</p>
+
+      <div class="evaluation-panel">
+        <div id="evaluationSummary" class="evaluation-summary"></div>
+        <form id="evaluationForm" class="evaluation-form">
+          <div class="rating-section">
+            <label><strong>¿Cómo fue tu experiencia?</strong> (1-5 estrellas)</label>
+            <div class="stars-input">
+              <input type="radio" name="calificacion" value="1" id="star1" />
+              <label for="star1" class="star">⭐</label>
+              <input type="radio" name="calificacion" value="2" id="star2" />
+              <label for="star2" class="star">⭐</label>
+              <input type="radio" name="calificacion" value="3" id="star3" />
+              <label for="star3" class="star">⭐</label>
+              <input type="radio" name="calificacion" value="4" id="star4" />
+              <label for="star4" class="star">⭐</label>
+              <input type="radio" name="calificacion" value="5" id="star5" checked />
+              <label for="star5" class="star">⭐</label>
+            </div>
+          </div>
+
+          <label>
+            <strong>Comentario (opcional):</strong>
+            <textarea id="comentario" placeholder="Cuéntanos tu experiencia... (máximo 500 caracteres)" maxlength="500" rows="6"></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary">Enviar evaluación</button>
+          <p id="evaluationMessage" class="message"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CareMatch. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initEvaluationPage);
+  </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class PerfilUsuario(models.Model):
     ROLES = [
@@ -23,6 +24,34 @@ class PerfilUsuario(models.Model):
 
     def es_profesional_salud(self):
         return self.rol == 'profesional'
+
+
+class DocumentoVerificacion(models.Model):
+    TIPOS_DOCUMENTO = [
+        ('licencia', 'Licencia Profesional'),
+        ('certificado', 'Certificado de Capacitación'),
+        ('credencial', 'Credencial Médica'),
+        ('otro', 'Otro documento'),
+    ]
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('aprobado', 'Aprobado'),
+        ('rechazado', 'Rechazado'),
+    ]
+
+    perfil = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='documentos_verificacion')
+    tipo_documento = models.CharField(max_length=20, choices=TIPOS_DOCUMENTO)
+    descripcion = models.CharField(max_length=255)
+    archivo = models.FileField(upload_to='documentos_verificacion/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+    notas_verificacion = models.TextField(blank=True, help_text="Notas del verificador")
+
+    def __str__(self):
+        return f"{self.perfil.usuario.username} - {self.tipo_documento}"
+
+    class Meta:
+        ordering = ['-fecha_subida']
 
 class Proveedor(models.Model):
     TIPOS_SERVICIO = [
@@ -70,3 +99,19 @@ class Solicitud(models.Model):
 
     def __str__(self):
         return f"Solicitud de {self.usuario} para {self.proveedor}"
+
+
+class Evaluacion(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='evaluaciones_realizadas')
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, related_name='evaluaciones_recibidas')
+    solicitud = models.OneToOneField(Solicitud, on_delete=models.CASCADE, related_name='evaluacion', null=True, blank=True)
+    calificacion = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], help_text="Calificación de 1 a 5 estrellas")
+    comentario = models.TextField(blank=True, help_text="Comentario detallado sobre el servicio")
+    fecha_evaluacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Evaluación de {self.usuario} a {self.proveedor} ({self.calificacion}★)"
+
+    class Meta:
+        ordering = ['-fecha_evaluacion']
+        unique_together = ('usuario', 'proveedor')
