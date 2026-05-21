@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CareMatch | Mensajes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html"><img class="logo-img" src="img/Logo.png" alt="Logo CareMatch"><span><b>Care</b>Match</span></a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="profile.html">Mi Perfil</a>
+      <a href="messages.html">Mensajes</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section>
+      <h1>Mensajes</h1>
+      <p>Página de mensajes (bandeja). Aquí aparecerán los contactos y conversaciones. Por ahora es una vista de ejemplo.</p>
+      <div id="messagesContainer" style="margin-top:18px"></div>
+    </section>
+    <script>
+      if (window.renderMessagesPage) window.renderMessagesPage();
+    </script>
+  </main>
+
+  <footer>CareMatch © 2026</footer>
+  <script src="app.js"></script>
+</body>
+</html>

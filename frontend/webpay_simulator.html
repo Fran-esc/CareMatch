@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Simulador WebPay</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="img/Logo.png" alt="Logo CareMatch">
+      <span><b>Care</b>Match</span>
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="profile.html">Mi Perfil</a>
+      <a href="messages.html">Mensajes</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page">
+      <a href="booking.html" class="back-arrow">←</a>
+      <h1 class="title-line">Simulador WebPay</h1>
+      <p class="subtitle">Completa el pago simulado para confirmar tu servicio.</p>
+
+      <div class="payment-panel" style="max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <div id="simulatorDetails" class="payment-summary"></div>
+
+        <!-- Formulario de Tarjeta Transbank Simulado -->
+        <div class="card-form-container" style="background: #f8fafc; border: 1px solid #cbd4d6; border-radius: 8px; padding: 20px; margin-top: 20px; text-align: left;">
+          <div style="display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #006178; padding-bottom: 10px; margin-bottom: 15px;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: #41ad49;"></div>
+            <h3 style="color: #006178; margin: 0; font-size: 16px; font-weight: bold;">Pago Seguro Webpay Plus</h3>
+          </div>
+          
+          <p style="font-size: 12px; color: #536a71; margin-top: 0; margin-bottom: 15px; line-height: 1.4;">
+            Ingresa los datos de tu tarjeta ficticia para concretar el agendamiento del servicio. <strong>Cualquier combinación de números es válida.</strong>
+          </p>
+
+          <form id="simulatorCardForm" onsubmit="return false;">
+            <div style="margin-bottom: 12px;">
+              <label for="cardNumber" style="display: block; font-size: 13px; font-weight: 700; color: #14333d; margin-bottom: 5px;">Número de Tarjeta</label>
+              <input type="text" id="cardNumber" placeholder="4575 1234 5678 9012" maxlength="19" style="width: 100%; padding: 10px; border: 1px solid #cbd4d6; border-radius: 6px; font-size: 15px;" required />
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-bottom: 12px;">
+              <div style="flex: 1;">
+                <label for="cardExpiry" style="display: block; font-size: 13px; font-weight: 700; color: #14333d; margin-bottom: 5px;">Vencimiento</label>
+                <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" style="width: 100%; padding: 10px; border: 1px solid #cbd4d6; border-radius: 6px; font-size: 15px;" required />
+              </div>
+              <div style="flex: 1;">
+                <label for="cardCvv" style="display: block; font-size: 13px; font-weight: 700; color: #14333d; margin-bottom: 5px;">CVV / Cód. Seguridad</label>
+                <input type="password" id="cardCvv" placeholder="123" maxlength="4" style="width: 100%; padding: 10px; border: 1px solid #cbd4d6; border-radius: 6px; font-size: 15px;" required />
+              </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+              <label for="cardName" style="display: block; font-size: 13px; font-weight: 700; color: #14333d; margin-bottom: 5px;">Nombre del Titular</label>
+              <input type="text" id="cardName" placeholder="Juan Pérez" style="width: 100%; padding: 10px; border: 1px solid #cbd4d6; border-radius: 6px; font-size: 15px;" required />
+            </div>
+          </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: center; gap: 10px;">
+            <button id="approveBtn" class="btn-primary" style="flex: 1; padding: 12px; background: #41ad49; border-radius: 6px; font-size: 15px; border: none; cursor: pointer;">Pagar y Agendar</button>
+            <button id="cancelBtn" class="btn-secondary" style="flex: 1; padding: 12px; background: #777; border-radius: 6px; font-size: 15px; border: none; cursor: pointer;">Cancelar Pago</button>
+          </div>
+          <button id="rejectBtn" style="background: none; border: none; color: #d9534f; text-decoration: underline; font-size: 12px; cursor: pointer; margin-top: 5px;">Simular rechazo de pago</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CareMatch. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function redirectToBackend(status) {
+      const token = getQueryParam('token');
+      const order = getQueryParam('order') || '';
+      const apiUrl = 'http://localhost:8000/api/pagos/confirmar/';
+      const target = `${apiUrl}?token_ws=${encodeURIComponent(token)}&status=${status}&order=${encodeURIComponent(order)}`;
+      window.location.href = target;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = getQueryParam('token');
+      const order = getQueryParam('order');
+      const amount = getQueryParam('amount');
+      const details = document.getElementById('simulatorDetails');
+
+      if (!token || !order) {
+        details.innerHTML = '<p style="color: red; text-align: center;">No se encontró información de pago. Regresa a la página de pago.</p>';
+        return;
+      }
+
+      details.innerHTML = `
+        <div class="payment-summary-item" style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 8px 0;"><strong>Orden de Compra:</strong> <span>${order}</span></div>
+        <div class="payment-summary-item" style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 8px 0; font-size: 16px;"><strong>Monto a Transferir:</strong> <strong style="color: #006178;">${Number(amount).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</strong></div>
+        <div class="payment-summary-item" style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 8px 0; font-size: 11px; color: #777;"><strong>Token:</strong> <span>${token}</span></div>
+      `;
+
+      // Auto-formatear número de tarjeta (espacio cada 4 caracteres)
+      const cardInput = document.getElementById('cardNumber');
+      cardInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+          if (i > 0 && i % 4 === 0) formatted += ' ';
+          formatted += value[i];
+        }
+        e.target.value = formatted;
+      });
+
+      // Auto-formatear fecha de vencimiento (añadir barra /)
+      const expiryInput = document.getElementById('cardExpiry');
+      expiryInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+          e.target.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        } else {
+          e.target.value = value;
+        }
+      });
+
+      // Validar y aprobar
+      document.getElementById('approveBtn').addEventListener('click', () => {
+        const form = document.getElementById('simulatorCardForm');
+        if (!form.checkValidity()) {
+          alert('Por favor complete todos los datos de su tarjeta ficticia.');
+          form.reportValidity();
+          return;
+        }
+        redirectToBackend('success');
+      });
+
+      document.getElementById('rejectBtn').addEventListener('click', () => redirectToBackend('failed'));
+      document.getElementById('cancelBtn').addEventListener('click', () => redirectToBackend('aborted'));
+    });
+  </script>
+</body>
+</html>

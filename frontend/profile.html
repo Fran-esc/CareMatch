@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareMatch | Mi perfil</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html"><img class="logo-img" src="img/Logo.png"
+        alt="Logo CareMatch"><span><b>Care</b>Match</span></a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="profile.html">Mi Perfil</a>
+      <a href="messages.html">Mensajes</a>
+      <a class="btn-login" href="login.html">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="profile-page">
+    <section class="profile-box">
+      <h1>Mi perfil</h1>
+      <p>Actualiza tu nombre, profesión, experiencia y documentos de validación.</p>
+
+      <form id="profileForm">
+        <div class="profile-pic-section">
+          <img id="profileImagePreview" src="img/Logo.png" alt="Foto de perfil" class="profile-pic">
+          <label class="btn-secondary file-upload-btn">
+            Cambiar foto
+            <input type="file" id="profileFoto" accept="image/*" class="hidden">
+          </label>
+        </div>
+
+        <input type="text" id="profileName" placeholder="Nombre completo" required />
+        <input type="email" id="profileEmail" placeholder="Correo electrónico" readonly />
+
+        <div id="fieldRut" class="hidden">
+          <input type="text" id="profileRut" placeholder="RUT (ej: 12.345.678-9)" />
+        </div>
+
+        <div id="fieldTelefono" class="hidden">
+          <input type="text" id="profileTelefono" placeholder="Teléfono" />
+        </div>
+
+        <div id="fieldEdad" class="hidden">
+          <input type="number" id="profileEdad" placeholder="Edad" />
+        </div>
+
+        <div id="fieldCondicion" class="hidden">
+          <textarea id="profileCondicion" placeholder="Condición médica" rows="3"></textarea>
+        </div>
+
+        <div id="fieldCertificado" class="hidden">
+          <label class="file-upload-label">
+            Subir certificado profesional (PDF)
+            <input type="file" id="profileCertificado" accept="application/pdf" />
+          </label>
+          <a id="profileCertificadoLink" class="hidden" target="_blank" rel="noopener noreferrer">Ver certificado actual</a>
+          <p id="certificadoStatusMsg" class="hidden" style="margin-top: 10px; font-weight: bold;"></p>
+        </div>
+
+        <button class="btn-primary" type="submit">Guardar cambios</button>
+      </form>
+
+      <button id="toggleMyServicesBtn" class="btn-secondary hidden" type="button" style="margin-top: 20px;">Ver servicios contratados</button>
+      <p id="profileMsg" class="success-msg"></p>
+    </section>
+
+    <!-- Sección de Mis Contratos y Servicios -->
+    <section id="myServicesBox" class="profile-box hidden" style="margin-top: 30px;">
+      <h2>Mis Contratos y Servicios</h2>
+      <p id="myServicesSubtitle">Aquí puedes ver el historial de servicios contratados y agendados.</p>
+      <div class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID Contrato</th>
+              <th>Servicio</th>
+              <th>Contraparte</th>
+              <th>Fecha y Hora</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="myServicesList">
+            <tr>
+              <td colspan="6" style="text-align: center;">No tienes servicios contratados aún.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="contractDetailsPanel" class="contract-panel hidden" style="margin-top: 25px; position: relative;">
+        <button id="closeContractPanelBtn" class="close-modal" aria-label="Cerrar contrato" style="position:absolute; right:16px; top:12px; z-index:5;">&times;</button>
+        <h3>Contrato de servicio</h3>
+        <div id="contractDetails"></div>
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="printContractBtn" class="btn-primary" type="button">Ver / Descargar PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Administrador -->
+    <section id="adminDashboard" class="profile-box hidden" style="margin-top: 30px;">
+      <h2>Panel de Administración</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <p style="margin: 0;">Gestión de certificados de profesionales de la salud pendientes de aprobación.</p>
+        <button class="btn-secondary" onclick="window.toggleAdminUsersView()">Ver todos los usuarios</button>
+      </div>
+      
+      <div id="adminCertificadosContainer" class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nombre Profesional</th>
+              <th>Correo</th>
+              <th>Certificado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="adminCertificadosList">
+            <!-- Los certificados pendientes se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- User Visualization Section -->
+      <div id="adminUsersView" class="hidden" style="margin-top: 20px;">
+        <hr style="border: none; border-top: 1px solid #d9d5df; margin-bottom: 20px;">
+        <h3>Directorio de Usuarios</h3>
+        
+        <div class="tabs" style="display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid #e1e8e9; padding-bottom: 10px; overflow-x: auto;">
+          <button class="tab-btn active" onclick="window.showUserTab('solicitante')">Clientes</button>
+          <button class="tab-btn" onclick="window.showUserTab('cuidador')">Cuidadores</button>
+          <button class="tab-btn" onclick="window.showUserTab('profesional')">Profesionales</button>
+          <button class="tab-btn" onclick="window.showUserTab('acompañante')">Acompañantes</button>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono / Info</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersList">
+              <!-- User list populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>CareMatch © 2026</footer>
+  <script src="app.js"></script>
+</body>
+
+</html>
